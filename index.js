@@ -10,4 +10,4 @@ app.use(express.json());
 
 app.use('/api', require('./routes/api'));
 
-app.listen(3000, () => console.log('Server running on port 3000'));
+process.env.PORT || 3000;
