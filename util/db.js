@@ -80,8 +80,6 @@ function checkUser(user) {
 }
 
 async function checkLiving() {
-    console.log("Checking living users");
-
     userArray.forEach(user => {
         if (user.user.lastAlive - Date.now() < 60000) {
             removeUser(user);
