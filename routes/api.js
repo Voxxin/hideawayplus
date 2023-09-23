@@ -74,4 +74,9 @@ router.get('/end/:user/:code', (req, res) => {
     }
 });
 
+router.get('/users/devs', (req, res) => {
+    const devs = require('../util/devs.json');
+    res.status(200).json({ devs });
+});
+
 module.exports = router;
