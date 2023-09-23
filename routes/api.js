@@ -37,9 +37,9 @@ router.get('/users', (req, res) => {
 
     userList.forEach(user => {
         if (user.user.lastAlive - Date.now() < 60000) {
-            users.push([user.user.uuid, user.user.name]);
+            users.push({"uuid": user.user.uuid, "name": user.user.name});
         }
-    }, this);
+    });
 
     res.status(200).json({ users });
 });
