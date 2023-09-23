@@ -8,6 +8,7 @@ const userArray = new Array();
     {
         "user": [
             "uuid": "uuid",
+            "name": "name",
             "lastAlive": "timestamp"
         ],
         "code": "code"
@@ -27,11 +28,12 @@ function generateCode() {
     return uuid;
 }
 
-function addUser(uuid, code) {
+function addUser(uuid, name, code) {
     if (!uuidExists(uuid)) {
         userArray.push({
             "user": {
                 "uuid": uuid,
+                "name": name,
                 "lastAlive": Date.now()
             },
             "code": code
@@ -99,6 +101,10 @@ function uuidGetUser(uuid) {
 
 function uuidExists(uuid) {
     return userArray.find(user => user.user.uuid === uuid)
+}
+
+function nameExists(name) {
+    return userArray.find(user => user.user.name === name)
 }
 
 function codeByUUID(uuid) {

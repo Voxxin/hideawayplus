@@ -5,11 +5,12 @@ const db = require('../util/db');
 const uuidRegex = /([0-9a-f]{8})(?:-|)([0-9a-f]{4})(?:-|)(4[0-9a-f]{3})(?:-|)([89ab][0-9a-f]{3})(?:-|)([0-9a-f]{12})/g;
 
 // Create a user
-router.get('/create/:user', (req, res) => {
+router.get('/create/:id/:name', (req, res) => {
     const user = req.params.user;
+    const name = req.params.name;
     if (user.match(uuidRegex)) {
         const code = db.generateCode();
-        const createdUser = db.addUser(user, code);
+        const createdUser = db.addUser(user, name, code);
         if (createdUser) {
         res.status(200).json({ 
             code: code 
@@ -36,7 +37,7 @@ router.get('/users', (req, res) => {
 
     userList.forEach(user => {
         if (user.user.lastAlive - Date.now() < 60000) {
-            users.push(user.user.uuid);
+            users.push([user.user.uuid, user.user.name]);
         }
     }, this);
 
