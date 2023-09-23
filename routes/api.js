@@ -6,11 +6,11 @@ const uuidRegex = /([0-9a-f]{8})(?:-|)([0-9a-f]{4})(?:-|)(4[0-9a-f]{3})(?:-|)([8
 
 // Create a user
 router.get('/create/:id/:name', (req, res) => {
-    const user = req.params.user;
+    const id = req.params.id;
     const name = req.params.name;
-    if (user.match(uuidRegex)) {
+    if (id.match(uuidRegex)) {
         const code = db.generateCode();
-        const createdUser = db.addUser(user, name, code);
+        const createdUser = db.addUser(id, name, code);
         if (createdUser) {
         res.status(200).json({ 
             code: code 
