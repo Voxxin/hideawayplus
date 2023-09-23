@@ -51,6 +51,7 @@ function userAlive(uuid, code) {
         const user = {
             "user": {
                 "uuid": uuid,
+                "name": nameByUUID(uuid),
                 "lastAlive": Date.now()
             },
             "code": code
@@ -103,8 +104,8 @@ function uuidExists(uuid) {
     return userArray.find(user => user.user.uuid === uuid)
 }
 
-function nameExists(name) {
-    return userArray.find(user => user.user.name === name)
+function nameByUUID(name) {
+    return userArray.find(user => user.user.uuid === name).user.name;
 }
 
 function codeByUUID(uuid) {

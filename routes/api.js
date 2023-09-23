@@ -11,6 +11,7 @@ router.get('/create/:id/:name', (req, res) => {
     if (id.match(uuidRegex)) {
         const code = db.generateCode();
         const createdUser = db.addUser(id, name, code);
+
         if (createdUser) {
         res.status(200).json({ 
             code: code 
@@ -52,7 +53,6 @@ router.get('/live/:uuid/:code', (req, res) => {
     if (!db.uuidExists(uuid)) {res.status(400).json({"error": true,"message": "User not alive"}); return;}
     if (!uuid.match(uuidRegex) || !code.match(uuidRegex) || db.codeByUUID(uuid) != code) {res.status(400).json({"error": true,"message": "Invalid UUID or code"});return;}
         
-        db.userAlive(uuid, code);
         res.status(200).json({ "success": true });
 });
 
