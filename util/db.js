@@ -75,8 +75,7 @@ function userRemoveUser(uuid, code) {
 
 function checkUser(user) {
     if (userArray.includes(user)) {
-        // The time since the last ping can't be bigger than 1 minute
-        if (user.user.lastAlive - Date.now() < 60000) {
+        if (Date.now() - user.user.lastAlive >= 60000) {
             removeUser(user);
         }
     }
@@ -84,11 +83,10 @@ function checkUser(user) {
 
 async function checkLiving() {
     userArray.forEach(user => {
-        if (user.user.lastAlive - Date.now() < 60000) {
+        if (Date.now() - user.user.lastAlive >= 60000) {
             removeUser(user);
-            console.log("Removed user " + user.user.uuid);
         }
-    }, this);
+    });
 }
 
 
